@@ -18,7 +18,7 @@ plane_id = p.loadURDF("plane.urdf", basePosition=[0, 0, 0])
 # Load your robot
 robot_id = p.loadURDF("assets/simplified/quadruped.urdf", basePosition=[0, 0, 0.5])  # Update this line
 
-# Function to get camera data
+""" # Function to get camera data
 def get_camera_data():
     view_matrix = p.computeViewMatrix(cameraEyePosition=[0, 0, 1],
                                        cameraTargetPosition=[0, 0, 0],
@@ -28,7 +28,7 @@ def get_camera_data():
                                                      nearVal=0.1,
                                                      farVal=10.0)
     img = p.getCameraImage(width=640, height=480, viewMatrix=view_matrix, projectionMatrix=projection_matrix)
-    return img[2]  # RGB image
+    return img[2]  # RGB image """
 
 # Function to set joint positions
 def set_joint_positions(joint_positions):
@@ -37,7 +37,7 @@ def set_joint_positions(joint_positions):
         p.setJointMotorControl2(robot_id, i, p.POSITION_CONTROL, targetPosition=joint_positions[i])
 
 # Define the TSDF volume and integrate data
-class TSDFVolume:
+""" class TSDFVolume:
     def __init__(self, bounds, voxel_size):
         self.bounds = bounds
         self.voxel_size = voxel_size
@@ -45,10 +45,10 @@ class TSDFVolume:
 
     def integrate(self, color_image, depth_image):
         # Integrate color and depth into the TSDF volume
-        pass
+        pass """
 
 # Inside the loop, after capturing RGB-D data
-tsdf_volume = TSDFVolume(bounds=[[-1, 1], [-1, 1], [0, 2]], voxel_size=0.01)
+#tsdf_volume = TSDFVolume(bounds=[[-1, 1], [-1, 1], [0, 2]], voxel_size=0.01)
 
 # Gait Parameters
 time_step = 1/240
@@ -56,6 +56,7 @@ t = 0
 amplitude = 0.5   # Adjust the amplitude of leg movements
 frequency = 1.0   # Speed of walking motion
 phase_shift = math.pi  # Phase shift between diagonal legs
+
 
 # Main loop to control the robot
 while True:
@@ -74,6 +75,8 @@ while True:
         back_right_leg    # Back Right Leg Joint
     ]
 
+    
+
     # Set joint positions for all legs
     set_joint_positions(joint_positions)
 
@@ -81,7 +84,7 @@ while True:
     t += time_step
 
     # Get camera data
-    rgb_image = get_camera_data()
+    #rgb_image = get_camera_data()
 
     # Step the simulation
     p.stepSimulation()
